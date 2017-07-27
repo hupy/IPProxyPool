@@ -186,9 +186,9 @@ def baidu_check(selfip, proxies):
     #     return protocol, types, speed
     try:
         start = time.time()
-        r = requests.get(url='https://www.baidu.com', headers=config.get_header(), timeout=config.TIMEOUT, proxies=proxies)
+        r = requests.get(url='http://p.3.cn/prices/mgets?callback=jQuery2158542&ext=11000000&pin=hupycn&type=1&area=1_72_2799_0&skuIds=J_4609658%2CJ_4715874%2CJ_1777837%2CJ_3755141%2CJ_4609652%2CJ_4206468%2CJ_1427585%2CJ_4609662%2CJ_3339537%2CJ_4189028%2CJ_4189040%2CJ_3108388%2CJ_3498623%2CJ_3753436%2CJ_4609660%2CJ_3108400%2CJ_2245565%2CJ_1658808970%2CJ_3473283%2CJ_3433317%2CJ_2891984%2CJ_2151534%2CJ_4742428%2CJ_2448048%2CJ_2634567%2CJ_1044476%2CJ_3612060%2CJ_3903644%2CJ_1927536%2CJ_3924180&pdbp=0&pdtk=&pdpin=hupycn&pduid=1494416947083572715223&source=list_pc_front&_=' + str(start), headers=config.get_header(), timeout=config.TIMEOUT, proxies=proxies)
         r.encoding = chardet.detect(r.content)['encoding']
-        if r.ok:
+        if r.ok and r.text.find("captcha") == -1 and r.text.find("jQuery") != -1:
             speed = round(time.time() - start, 2)
             protocol= 0
             types=0
